@@ -77,7 +77,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
     <!-- CSS Preline -->
     <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
     <link rel="stylesheet" href="../assets/css/date.css" />
-    <script defer src="../assets/js/date.js"></script>
+    <script defer src="../assets/js/date2.js"></script>
 
     <?php
     error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -520,189 +520,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
         }
         ?>
 
-        <!-- Modal Edit Pemesanan -->
-        <div id="editPemesananModal" class="fixed inset-0 bg-black/90 10 hidden justify-center items-center size-full top-0 start-0 z-80 overflow-x-hidden overflow-y-auto shadow-sm">
-            <div class="flex justify-center items-center h-full text-white">
-                <div class="bg-neutral-900 rounded-lg p-8 w-1/2 fade-in modal-content">
-                    <div class="flex mb-4 pb-3 border-b border-neutral-700 justify-between">
-                        <h3 class="text-xl font-bold">Edit Pemesanan</h3>
-                        <button id="closeEditPemesananModal" class="bg-neutral-700 rounded-full p-2">
-                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 6 6 18"></path>
-                                <path d="m6 6 12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div>
-                        <form action="../controller/updatePemesanan.php" method="POST">
-                            <div class=" space-y-3">
-                                <div class="grid grid-cols-2 space-x-3">
-                                    <div>
-                                        <!-- Select -->
-                                        <label for="namaPemesant" class="text-white ml-4 text-sm dark:text-neutral-500">Nama Pemesan</label>
-                                        <!-- <div class="mt-1.5"></div> -->
-                                        <select id="namaPemesan" name="namaPemesan" data-hs-select='{
-  "hasSearch": true,
-  "searchLimit": 5,
-  "searchPlaceholder": "Cari",
-  "searchClasses": "block w-full sm:text-sm rounded-lg focus:border-neutral-700 focus:ring-neutral-700 before:absolute before:inset-0 before:z-1 dark:bg-neutral-800 dark:text-white dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
-  "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-800",
-  "placeholder": "Masukkan nama pemesan",
-  "toggleTag": "<button type=\"button\" aria-expanded=\"false\"><span class=\"me-2\" data-icon></span><span class=\"text-gray-800 dark:text-neutral-200 \" data-title></span></button>",
-  "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-neutral-700 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
-  "dropdownClasses": "mt-2 max-h-72 pb-1 px-1 space-y-0.5 z-20 w-full bg-white border border-neutral-700 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
-  "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-neutral-700 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:border-neutral-700 dark:text-neutral-200 dark:focus:bg-neutral-800",
-  "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
-  "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-}' class="hidden">
-                                            <option selected="" disabled>Pilih pemesan</option>
-                                            <?php
-                                            $qpemesan = $koneksi->query("SELECT * FROM akun WHERE role='user'");
-                                            while ($dataPemesan = $qpemesan->fetch_assoc()) {
-                                                echo '<option value="' . $dataPemesan['id_akun'] . '">' . $dataPemesan['nama'] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="relative">
-                                        <label for="noHp" class="text-white ml-4 text-sm dark:text-neutral-500">Nomor HP</label>
-                                        <div class="mt-.5"></div>
-                                        <input required type="text" id="no_hp" class="peer py-2.5 sm:py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg sm:text-sm focus:border-neutral-700 focus:ring-neutral-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-white dark:placeholder-neutral-500 dark:focus:ring-neutral-700" placeholder="Masukkan nomor hp" name="no_hp">
-                                        <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
-                                            <svg class="shrink-0 size-5 mt-6 text-gray-500 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                                <g id="SVGRepo_iconCarrier">
-                                                    <path d="M10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C14.1588 20.0658 10.9183 19.5829 7.6677 16.3323C4.41713 13.0817 3.93421 9.84122 4.00655 7.93309C4.04952 6.7996 4.7008 5.77423 5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617Z" stroke="#6e6e6e" stroke-width="1.5" stroke-linecap="round"></path>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="grid grid-cols-2 space-x-3">
-                                    <div class="relative text-xl">
-                                        <label for="lapangan" class="text-white ml-4 text-sm dark:text-neutral-500">Lapangan</label>
-                                        <select id="lapangan" name="lapangan" class="py-3 mt-1.5 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-neutral-700 focus:ring-neutral-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-white dark:focus:ring-neutral-600">
-                                            <option selected="" disabled>Pilih Lapangan</option>
-                                            <?php
-                                            $a = $koneksi->query("SELECT * FROM lapangan");
-                                            while ($lapangan = $a->fetch_assoc()) {
-                                                echo '<option value="' . $lapangan['id_lapangan'] . '">' . $lapangan['nama_lapangan'] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="mt-1">
-                                        <label for="paket" class="text-white ml-4 text-sm dark:text-neutral-500">Tanggal Pemesanan</label>
-                                        <div class="relative mt-1.5 text-xl">
-                                            <div class="datepicker-container">
-                                                <div class="bg-neutral-800 rounded-lg border-2 border-transparent focus-within:border-neutral-700">
-                                                    <input type="text" name="tanggal" id="tanggal" required class="date-input ml-10 w-fit" placeholder="Pilih tanggal" />
-                                                    <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
-                                                        <svg class="shrink-0 size-4 text-neutral-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                                                            <line x1="16" x2="16" y1="2" y2="6" />
-                                                            <line x1="8" x2="8" y1="2" y2="6" />
-                                                            <line x1="3" x2="21" y1="10" y2="10" />
-                                                            <path d="M8 14h.01" />
-                                                            <path d="M12 14h.01" />
-                                                            <path d="M16 14h.01" />
-                                                            <path d="M8 18h.01" />
-                                                            <path d="M12 18h.01" />
-                                                            <path d="M16 18h.01" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="datepicker" hidden>
-                                                    <!-- .datepicker-header -->
-                                                    <div class="datepicker-header">
-                                                        <button type="button" class="prev">Prev</button>
-
-                                                        <div>
-                                                            <select class="month-input">
-                                                                <option>Januari</option>
-                                                                <option>Februari</option>
-                                                                <option>Maret</option>
-                                                                <option>April</option>
-                                                                <option>Mei</option>
-                                                                <option>Juni</option>
-                                                                <option>Juli</option>
-                                                                <option>Agustus</option>
-                                                                <option>September</option>
-                                                                <option>October</option>
-                                                                <option>November</option>
-                                                                <option>Desember</option>
-                                                            </select>
-                                                            <input type="number" class="year-input px-1.5" min="1900" max="2100" />
-                                                        </div>
-
-                                                        <button type="button" class="next">Next</button>
-                                                    </div>
-                                                    <!-- /.datepicker-header -->
-
-                                                    <!-- .days -->
-                                                    <div class="days">
-                                                        <span>Min</span>
-                                                        <span>Sen</span>
-                                                        <span>Sel</span>
-                                                        <span>Rab</span>
-                                                        <span>Kam</span>
-                                                        <span>Jum</span>
-                                                        <span>Sab</span>
-                                                    </div>
-                                                    <!-- /.days -->
-
-                                                    <!-- .dates -->
-                                                    <div class="dates"></div>
-                                                    <!-- /.dates -->
-                                                    <div class="text-xs text-white flex mb-3">
-                                                        <p>
-                                                            *<span class="ml-1 text-white bg-red-600 px-1 py-0.5 w-fit h-fit">Merah</span> berarti full
-                                                        </p>
-                                                    </div>
-
-                                                    <!-- .datepicker-footer -->
-                                                    <div class="datepicker-footer">
-                                                        <button type="button" class="cancel">Batal</button>
-                                                        <button type="button" id="applyTanggal" class="apply" onclick="console.log('clicked')">Pilih</button>
-                                                    </div>
-                                                    <!-- /.datepicker-footer -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="pilihanPaket">
-                                    <div class="flex mt-1 space-x-3" id="paketList">
-
-                                    </div>
-                                </div>
-                                <input type="hidden" name="id_paket" id="id_paket">
-
-
-
-
-
-
-
-
-                            </div>
-                            <div class="flex mt-5 text-white text-sm justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
-                                <input type="reset" id="reset" value="Reset" class="bg-red-500 hover:bg-red-600 hover:cursor-pointer rounded-lg py-2 px-3">
-                                <input type="submit" name="" id="" value="Tambah" class="bg-green-600 hover:bg-green-700 hover:cursor-pointer rounded-lg py-2 px-3">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <div class="flex flex-col border border-yellow-200 shadow-2xs rounded-xl dark:bg-yellow-500/10 dark:border-yellow-500/20">
@@ -1252,8 +1070,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
     </script>
 
     <script>
-        document.querySelectorAll('#lapangan').forEach((lapangan) => {
-            lapangan.addEventListener('change', function() {
+        document.getElementById('lapangan').addEventListener('change', function() {
                 const id_lapangan = this.value;
                 const paketList = document.getElementById('paketList');
                 paketList.innerHTML = "";
@@ -1306,23 +1123,21 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                     });
             });
 
-        });
 
 
-        document.querySelectorAll('#tanggal').forEach((tanggal) => {
-            tanggal.addEventListener('change', function() {
+        document.getElementById('tanggal').addEventListener('change', function() {
                 const tanggalSelected = this.value;
-                console.log("tanggalSelected: ", tanggalSelected);
+                // console.log("tanggalSelected: ", tanggalSelected);
 
                 fetch(`../controller/cek_slot.php?tanggal=${tanggalSelected}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Slot dari server:", data);
+                        // console.log("Slot dari server:", data);
                         data.forEach(slot => {
                             document.querySelectorAll('#paketList div').forEach(p => {
                                 console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
                                 if (p.dataset.idPaket == slot.id_paket) {
-                                    p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "hover:cursor-pointer");
+                                    p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border","hover:cursor-pointer");
                                     p.classList.add("bg-neutral-700");
                                     p.style.pointerEvents = "none";
                                 }
@@ -1332,37 +1147,9 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
 
                     });
             });
-        });
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const editButtons = document.querySelectorAll(".openEditPemesananModal");
-            const editModal = document.getElementById("editPemesananModal");
-            const closeModal = document.getElementById("closeEditPemesananModal");
-
-            editButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const idPemesan = button.getAttribute("data-idAkun");
-                    const namaPemesan = button.getAttribute("data-namaAkun");
-                    const noHP = button.getAttribute("data-noHP");
-                    const idLapangan = button.getAttribute("data-idLapangan");
-                    const namaLapangan = button.getAttribute("data-namaLapangan");
-                    const tanggal = button.getAttribute("data-tanggalPemesanan");
-                    const idPaket = button.getAttribute("data-idPaket");
-                    const namaPaket = button.getAttribute("data-namaPaket");
-                    const jamPaket = button.getAttribute("data-jamPaket");
-                    const status = button.getAttribute("data-status");
-
-                    editModal.classList.remove('hidden');
-                });
-            });
-
-            closeModal.addEventListener('click', () => {
-                editModal.classList.add('hidden');
-            });
-        });
-    </script>
+    
 
     <script>
         document.querySelector('[data-hs-remove-element="#dismiss-alert"]').addEventListener('click', function() {

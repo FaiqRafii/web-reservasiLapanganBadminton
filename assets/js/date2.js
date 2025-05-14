@@ -56,7 +56,7 @@ applyBtn.addEventListener("click", () => {
     p.style.pointerEvents = "auto";
   });
 
-  fetch(`..../controller/cek_slot.php?tanggal=${tanggal}`)
+  fetch(`../controller/cek_slot.php?tanggal=${tanggal}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("Slot dari server:", data);
@@ -72,7 +72,8 @@ applyBtn.addEventListener("click", () => {
             p.classList.remove(
               "bg-[#0a2008]",
               "hover:bg-[#237219]",
-              "hover:cursor-pointer"
+              "hover:cursor-pointer",
+              "border"
             );
             p.classList.add("bg-neutral-700");
             p.style.pointerEvents = "none";
