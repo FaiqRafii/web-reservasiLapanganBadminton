@@ -1,0 +1,53 @@
+document.querySelector('select[name="namaPemesan"]').value = namaPemesan;
+                    document.querySelector('input[name="no_hp"]').value = noHP;
+                    document.querySelector('input[name="tanggal"]').value = tanggal;
+                    const paketList = document.getElementById('paketList');
+                    paketList.innerHTML = "";
+                    document.getElementById("id_paket").value = "";
+                    const label = document.createElement('label');
+                    paketList.innerHTML = "";
+                    fetch(`../controller/get_paket.php?id_lapangan=${idLapangan}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const paketList = document.getElementById("paketList");
+                            paketList.innerHTML = "";
+
+                            const label = document.createElement('label');
+                            paketList.innerHTML = "";
+                            label.className = "text-white ml-4 text-sm dark:text-neutral-500";
+                            label.textContent = "Paket"
+                            label.id = "labelPaket"
+                            paketList.parentNode.insertBefore(label, paketList);
+
+                            data.forEach(paket => {
+                                const div = document.createElement('div');
+                                div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
+                                div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
+                                div.dataset.idPaket = paket.id_paket;
+
+                                const inputPaket = document.getElementById("id_paket");
+                                inputPaket.value = this.dataset.idPaket;
+
+                                document.querySelectorAll("#paketList div").forEach(d => {
+                                    if (d.dataset.idPaket == idPaket) {
+                                        d.classList.remove("bg-[#237219]");
+                                        d.classList.add("bg-[#0a2008]");
+                                    }
+                                });
+                                this.classList.remove("bg-[#0a2008]");
+                                this.classList.add("bg-[#237219]");
+
+                                if (inputPaket.value === "") {
+                                    inputPaket.value = null;
+                                }
+
+                                console.log("id_paket terpilih:", inputPaket.value);
+
+                                paketList.appendChild(div);
+                            });
+                        });
+
+
+
+
+                        
