@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@preline/datepicker": "^3.0.1",
+    "@preline/select": "^3.0.0",
     "flowbite": "^1.8.1",
     "lodash": "^4.17.21",
     "vanilla-calendar-pro": "^3.0.4"

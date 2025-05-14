@@ -424,7 +424,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 </div>
                 <div class="ms-2">
                     <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
-                        Berhasil menghapus akun
+                        Berhasil menghapus pemesanan
                     </h3>
                 </div>
                 <div class="ps-3 ms-auto">
@@ -448,7 +448,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 </div>
                 <div class="ms-2">
                     <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
-                        Gagal menghapus akun
+                        Gagal menghapus pemesanan
                     </h3>
                 </div>
                 <div class="ps-3 ms-auto">
@@ -477,7 +477,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 </div>
                 <div class="ms-2">
                     <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
-                        Berhasil mengubah akun
+                        Berhasil mengubah pemesanan
                     </h3>
                 </div>
                 <div class="ps-3 ms-auto">
@@ -501,7 +501,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 </div>
                 <div class="ms-2">
                     <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
-                        Gagal mengubah akun
+                        Gagal mengubah pemesanan
                     </h3>
                 </div>
                 <div class="ps-3 ms-auto">
@@ -520,7 +520,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
         }
         ?>
 
-        
+
 
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <div class="flex flex-col border border-yellow-200 shadow-2xs rounded-xl dark:bg-yellow-500/10 dark:border-yellow-500/20">
@@ -615,7 +615,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 <div class="flex justify-center items-center h-full text-white">
                     <div class="bg-neutral-900 rounded-lg p-8 w-1/2 fade-in modal-content">
                         <div class="flex mb-4 pb-3 border-b border-neutral-700 justify-between">
-                            <h3 class="text-xl font-bold">Tambah Pemesanan</h3>
+                            <h3 class="text-xl font-bold">Ubah dan Tambah Pemesanan</h3>
                             <button id="closeAddPemesananModal" class="bg-neutral-700 rounded-full p-2">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M18 6 6 18"></path>
@@ -624,7 +624,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                             </button>
                         </div>
                         <div>
-                            <form action="../controller/tambahPemesanan.php" method="POST">
+                            <form id="formPemesanan" action="../controller/tambahPemesanan.php" method="POST">
                                 <div class=" space-y-3">
                                     <div class="grid grid-cols-2 space-x-3">
                                         <div>
@@ -654,6 +654,10 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                                 ?>
                                             </select>
                                         </div>
+
+                                        
+                                        <input type="hidden" id="idPemesanan" name="idPemesanan">
+
                                         <div class="relative">
                                             <label for="noHp" class="text-white ml-4 text-sm dark:text-neutral-500">Nomor HP</label>
                                             <div class="mt-.5"></div>
@@ -776,16 +780,10 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     </div>
                                     <input type="hidden" name="id_paket" id="id_paket">
 
-
-
-
-
-
-
-
                                 </div>
                                 <div class="flex mt-5 text-white text-sm justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
                                     <input type="reset" id="reset" value="Reset" class="bg-red-500 hover:bg-red-600 hover:cursor-pointer rounded-lg py-2 px-3">
+                                    <button type="button" onclick="updatePemesanan()" class="bg-blue-600 hover:bg-blue-800 w-fit h-fit px-3 py-2 rounded-lg">Update</button>
                                     <input type="submit" name="" id="" value="Tambah" class="bg-green-600 hover:bg-green-700 hover:cursor-pointer rounded-lg py-2 px-3">
                                 </div>
                             </form>
@@ -897,6 +895,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                         $idAkun = $dataPemesanan['id_akun'];
                                         $idLapangan = $dataPemesanan['id_lapangan'];
                                         $idPaket = $dataPemesanan['id_paket'];
+                                        $idPemesanan=$dataPemesanan['id_pemesanan'];
                                         $qnama = $koneksi->query("SELECT nama FROM akun WHERE id_akun='" . $idAkun . "'");
                                         $namaAkun = $qnama->fetch_assoc()['nama'];
                                         $qhp = $koneksi->query("SELECT no_hp FROM akun WHERE id_akun='" . $idAkun . "'");
@@ -951,14 +950,14 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     </td>';
                                         echo '<td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-1.5">';
-                                        echo '<a href="../controller/hapusPemesanan.php?id=' . $dataPemesanan['id_pemesanan'] . '" 
+                                        echo '<a href="../controller/hapusPemesanan.php?idPemesanan=' . $dataPemesanan['id_pemesanan'] . '" 
                                                          onclick="return confirm(\'Yakin ingin menghapus akun ini?\')" 
                                                          class="inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500">Hapus</a>';
                                         echo '</div>
                                         </td>';
                                         echo '<td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-1.5">
-                                                <a class="openEditPemesananModal inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" data-idAkun="' . $idAkun . '" data-namaAkun="' . $namaAkun . '" data-noHP="' . $noHp . '" data-idLapangan="' . $idLapangan . '" data-namaLapangan="' . $namaLapangan . '" data-tanggal="' . $dataPemesanan['tanggal_pemesanan'] . '" data-idPaketn="' . $idPaket . '" data-namaPaket="' . $namaPaket . '" data-jamPaket="' . $jamPaket . '" data-status="' . $dataPemesanan['status_pemesanan'] . '">
+                                                <a class="openEditPemesananModal inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" data-idPemesanan="'.$idPemesanan.'" data-idAkun="' . $idAkun . '" data-namaAkun="' . $namaAkun . '" data-noHP="' . $noHp . '" data-idLapangan="' . $idLapangan . '" data-namaLapangan="' . $namaLapangan . '" data-tanggal="' . $dataPemesanan['tanggal_pemesanan'] . '" data-idPaketn="' . $idPaket . '" data-namaPaket="' . $namaPaket . '" data-jamPaket="' . $jamPaket . '" data-status="' . $dataPemesanan['status_pemesanan'] . '">
                                                     Edit
                                                 </a>
                                             </div>
@@ -1025,9 +1024,25 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
     <script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/preline/dist/helper-apexcharts.js"></script>
 
+
+    <script>
+        function updatePemesanan() {
+            const idPemesanan=document.querySelector('input[name="idPemesanan"]').value;
+            const idAkun = document.querySelector('select[name="namaPemesan"]').value;
+            const noHp = document.querySelector('input[name="no_hp"]').value;
+            const lapangan = document.querySelector('select[name="lapangan"]').value;
+            const tanggal = document.querySelector('input[name="tanggal"]').value;
+            const idPaket = document.querySelector('input[name="id_paket"]').value;
+
+            const url = `/controller/updatePemesanan.php?idPemesanan=${idPemesanan}&idAkun=${encodeURIComponent(idAkun)}&noHp=${encodeURIComponent(noHp)}&lapangan=${encodeURIComponent(lapangan)}&tanggal=${encodeURIComponent(tanggal)}&idPaket=${encodeURIComponent(idPaket)}`;
+            window.location.href = url;
+        }
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const openAddPemesananBtn = document.getElementById('openAddPemesananModal');
+            const openEditPemesananBtn = document.querySelectorAll('.openEditPemesananModal');
             const closeAddPemesananBtn = document.getElementById('closeAddPemesananModal');
             const addPemesananModal = document.getElementById('addPemesananModal');
 
@@ -1038,6 +1053,87 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
             closeAddPemesananBtn.addEventListener('click', () => {
                 addPemesananModal.classList.add('hidden');
             });
+
+            openEditPemesananBtn.forEach(e => {
+                e.addEventListener('click', () => {
+                    document.querySelector('input[name="idPemesanan"]').value=e.getAttribute('data-idPemesanan');
+                    document.querySelector('select[name="namaPemesan"]').value = e.getAttribute('data-idAkun');
+                    document.querySelector('input[name="no_hp"]').value = e.getAttribute('data-noHp');
+                    document.querySelector('select[name="lapangan"]').value = e.getAttribute('data-idLapangan');
+                    document.querySelector('input[name="tanggal"]').value = e.getAttribute('data-tanggal');
+
+                    const id_lapangan = e.getAttribute('data-idLapangan');
+
+                    fetch(`../controller/get_paket.php?id_lapangan=${id_lapangan}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const paketList = document.querySelectorAll("#paketList");
+                            paketList.forEach(paketList => {
+                                paketList.innerHTML = "";
+
+                                if (!document.getElementById('label')) {
+                                    const label = document.createElement('label');
+                                    label.className = "text-white ml-4 text-sm dark:text-neutral-500";
+                                    label.textContent = "Paket"
+                                    label.id = "labelPaket"
+                                    paketList.innerHTML = "";
+                                    paketList.parentNode.insertBefore(label, paketList);
+                                }
+
+                                data.forEach(paket => {
+                                    const div = document.createElement('div');
+                                    div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
+                                    div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
+                                    div.dataset.idPaket = paket.id_paket;
+
+                                    div.addEventListener("click", function() {
+                                        const inputPaket = document.getElementById("id_paket");
+                                        inputPaket.value = this.dataset.idPaket;
+
+                                        document.querySelectorAll("#paketList div").forEach(d => {
+                                            d.classList.remove("bg-[#237219]");
+                                            d.classList.add("bg-[#0a2008]");
+                                        });
+                                        this.classList.remove("bg-[#0a2008]");
+                                        this.classList.add("bg-[#237219]");
+
+                                        if (inputPaket.value === "") {
+                                            inputPaket.value = null;
+                                        }
+
+                                        console.log("id_paket terpilih:", inputPaket.value);
+                                    });
+
+                                    paketList.appendChild(div);
+                                });
+
+                            });
+                        });
+
+
+                    const tanggalSelected = e.getAttribute('data-tanggal');
+                    fetch(`../controller/cek_slot.php?tanggal=${tanggalSelected}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // console.log("Slot dari server:", data);
+                            data.forEach(slot => {
+                                document.querySelectorAll('#paketList div').forEach(p => {
+                                    console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
+                                    if (p.dataset.idPaket == slot.id_paket) {
+                                        p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border", "hover:cursor-pointer");
+                                        p.classList.add("bg-neutral-700");
+                                        p.style.pointerEvents = "none";
+                                    }
+                                });
+                            });
+
+
+                        });
+
+
+                    addPemesananModal.classList.remove('hidden');
+                });
+            })
         });
     </script>
 
@@ -1061,95 +1157,99 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
             const paketList = document.getElementById('paketList');
             paketList.innerHTML = "";
 
-            const labelPaket = document.getElementById('labelPaket');
-            if (labelPaket) {
-                labelPaket.remove(); // hapus seluruh elemen, bukan cuma isinya
-            }
+            const labelPaket = document.querySelectorAll('#labelPaket').forEach(e => {
+                e.innerHTML = "";
+                e.remove();
+
+            })
 
         });
     </script>
 
     <script>
         document.getElementById('lapangan').addEventListener('change', function() {
-                const id_lapangan = this.value;
-                const paketList = document.getElementById('paketList');
-                paketList.innerHTML = "";
-                document.getElementById("id_paket").value = "";
-                const label = document.createElement('label');
-                paketList.innerHTML = "";
+            const id_lapangan = this.value;
+            const paketList = document.getElementById('paketList');
+            paketList.innerHTML = "";
+            document.getElementById("id_paket").value = "";
+            const label = document.createElement('label');
+            paketList.innerHTML = "";
 
-                fetch(`../controller/get_paket.php?id_lapangan=${id_lapangan}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const paketList = document.querySelectorAll("#paketList");
-                        paketList.forEach(paketList => {
-                            paketList.innerHTML = "";
+            fetch(`../controller/get_paket.php?id_lapangan=${id_lapangan}`)
+                .then(response => response.json())
+                .then(data => {
+                    const paketList = document.querySelectorAll("#paketList");
+                    paketList.forEach(paketList => {
+                        paketList.innerHTML = "";
 
+                        if (!document.getElementById('label')) {
                             const label = document.createElement('label');
-                            paketList.innerHTML = "";
                             label.className = "text-white ml-4 text-sm dark:text-neutral-500";
                             label.textContent = "Paket"
                             label.id = "labelPaket"
+                            paketList.innerHTML = "";
                             paketList.parentNode.insertBefore(label, paketList);
+                        }
 
-                            data.forEach(paket => {
-                                const div = document.createElement('div');
-                                div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
-                                div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
-                                div.dataset.idPaket = paket.id_paket;
 
-                                div.addEventListener("click", function() {
-                                    const inputPaket = document.getElementById("id_paket");
-                                    inputPaket.value = this.dataset.idPaket;
+                        data.forEach(paket => {
+                            const div = document.createElement('div');
+                            div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
+                            div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
+                            div.dataset.idPaket = paket.id_paket;
 
-                                    document.querySelectorAll("#paketList div").forEach(d => {
-                                        d.classList.remove("bg-[#237219]");
-                                        d.classList.add("bg-[#0a2008]");
-                                    });
-                                    this.classList.remove("bg-[#0a2008]");
-                                    this.classList.add("bg-[#237219]");
+                            div.addEventListener("click", function() {
+                                const inputPaket = document.getElementById("id_paket");
+                                inputPaket.value = this.dataset.idPaket;
 
-                                    if (inputPaket.value === "") {
-                                        inputPaket.value = null;
-                                    }
-
-                                    console.log("id_paket terpilih:", inputPaket.value);
+                                document.querySelectorAll("#paketList div").forEach(d => {
+                                    d.classList.remove("bg-[#237219]");
+                                    d.classList.add("bg-[#0a2008]");
                                 });
+                                this.classList.remove("bg-[#0a2008]");
+                                this.classList.add("bg-[#237219]");
 
-                                paketList.appendChild(div);
+                                if (inputPaket.value === "") {
+                                    inputPaket.value = null;
+                                }
+
+                                console.log("id_paket terpilih:", inputPaket.value);
                             });
 
+                            paketList.appendChild(div);
                         });
+
                     });
-            });
+                });
+        });
 
 
 
         document.getElementById('tanggal').addEventListener('change', function() {
-                const tanggalSelected = this.value;
-                // console.log("tanggalSelected: ", tanggalSelected);
+            const tanggalSelected = this.value;
+            // console.log("tanggalSelected: ", tanggalSelected);
 
-                fetch(`../controller/cek_slot.php?tanggal=${tanggalSelected}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // console.log("Slot dari server:", data);
-                        data.forEach(slot => {
-                            document.querySelectorAll('#paketList div').forEach(p => {
-                                console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
-                                if (p.dataset.idPaket == slot.id_paket) {
-                                    p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border","hover:cursor-pointer");
-                                    p.classList.add("bg-neutral-700");
-                                    p.style.pointerEvents = "none";
-                                }
-                            });
+            fetch(`../controller/cek_slot.php?tanggal=${tanggalSelected}`)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log("Slot dari server:", data);
+                    data.forEach(slot => {
+                        document.querySelectorAll('#paketList div').forEach(p => {
+                            console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
+                            if (p.dataset.idPaket == slot.id_paket) {
+                                p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border", "hover:cursor-pointer");
+                                p.classList.add("bg-neutral-700");
+                                p.style.pointerEvents = "none";
+                            }
                         });
-
-
                     });
-            });
+
+
+                });
+        });
     </script>
 
-    
+
 
     <script>
         document.querySelector('[data-hs-remove-element="#dismiss-alert"]').addEventListener('click', function() {
