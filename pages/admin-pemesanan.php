@@ -1,6 +1,6 @@
 <?php
 include '../controller/koneksi.php';
-$pemesanan = $koneksi->query("SELECT * FROM pemesanan");
+$pemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE status_pemesanan='approved'");
 $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
 ?>
 
@@ -14,6 +14,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
     $tambah = isset($_GET['tambah']) ? htmlentities($_GET['tambah']) : '';
     $hapus = isset($_GET['hapus']) ? htmlentities($_GET['hapus']) : '';
     $update = isset($_GET['update']) ? htmlentities($_GET['update']) : '';
+    $approve = isset($_GET['approval']) ? htmlentities($_GET['approval']) : '';
     ?>
 
 
@@ -268,7 +269,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                 <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
                     <ul class="flex flex-col space-y-1">
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white" href="#">
+                            <a href="../pages/admin.php" class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-white" href="#">
                                 <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                                     <polyline points="9 22 9 12 15 12 15 22" />
@@ -518,17 +519,108 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
             </div>
         </div>';
         }
+        if ($approve === 'approved') {
+            echo '<div id="dismiss-alert" class="hs-removing:translate-x-5 mx-5 hs-removing:opacity-0 transition duration-300 bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-dismiss-button-label">
+            <div class="flex">
+                <div class="shrink-0">
+                    <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </div>
+                <div class="ms-2">
+                    <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
+                        Pemesanan approved
+                    </h3>
+                </div>
+                <div class="ps-3 ms-auto">
+                    <div class="-mx-1.5 -my-1.5">
+                        <button type="button" class="inline-flex bg-teal-50 rounded-lg p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-hidden focus:bg-teal-100 dark:bg-transparent dark:text-teal-600 dark:hover:bg-teal-800/50 dark:focus:bg-teal-800/50" data-hs-remove-element="#dismiss-alert">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"></path>
+                                <path d="m6 6 12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        } else if ($approve === 'rejected') {
+            echo '<div id="dismiss-alert" class="hs-removing:translate-x-5 mx-5 hs-removing:opacity-0 transition duration-300 bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500" role="alert" tabindex="-1" aria-labelledby="hs-dismiss-button-label">
+            <div class="flex">
+                <div class="shrink-0">
+                    <svg class="shrink-0 size-4 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                        <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                </div>
+                <div class="ms-2">
+                    <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
+                        Pemesanan rejected
+                    </h3>
+                </div>
+                <div class="ps-3 ms-auto">
+                    <div class="-mx-1.5 -my-1.5">
+                        <button type="button" class="inline-flex bg-teal-50 rounded-lg p-1.5 text-teal-500 hover:bg-teal-100 focus:outline-hidden focus:bg-teal-100 dark:bg-transparent dark:text-teal-600 dark:hover:bg-teal-800/50 dark:focus:bg-teal-800/50" data-hs-remove-element="#dismiss-alert">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"></path>
+                                <path d="m6 6 12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        } else if ($approve == 'gagal') {
+            echo '<div id="dismiss-alert" class="hs-removing:translate-x-5 mx-5 hs-removing:opacity-0 transition duration-300 bg-red-50 border border-red-200 text-sm text-red-800 rounded-lg p-4 dark:bg-red-800/10 dark:border-red-900 dark:text-red-500" role="alert" tabindex="-1" aria-labelledby="hs-dismiss-button-label">
+            <div class="flex">
+                <div class="shrink-0">
+                <svg fill="#ee201b" width="20" height="20" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ee201b" stroke-width="0.005"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165Z"></path><path d="M128.5,74a9.67,9.67,0,0,0-14,0L100,88.5l-14-14a9.9,9.9,0,0,0-14,14l14,14-14,14a9.9,9.9,0,0,0,14,14l14-14,14,14a9.9,9.9,0,0,0,14-14l-14-14,14-14A10.77,10.77,0,0,0,128.5,74Z"></path></g></svg>
+                </div>
+                <div class="ms-2">
+                    <h3 id="hs-dismiss-button-label" class="text-sm font-medium">
+                        Proses approval gagal
+                    </h3>
+                </div>
+                <div class="ps-3 ms-auto">
+                    <div class="-mx-1.5 -my-1.5">
+                        <button type="button" class="inline-flex bg-red-50 rounded-lg p-1.5 text-red-500 hover:bg-red-100 focus:outline-hidden focus:bg-red-100 dark:bg-transparent dark:text-red-600 dark:hover:bg-read-800/50 dark:focus:bg-read-800/50" data-hs-remove-element="#dismiss-alert">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18"></path>
+                                <path d="m6 6 12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        }
         ?>
 
 
 
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
-            <div class="flex flex-col border border-yellow-200 shadow-2xs rounded-xl dark:bg-yellow-500/10 dark:border-yellow-500/20">
-                <div class="p-4 md:p-5">
-                    <div class="flex flex-col md:flex-row md:flex-wrap items-start md:items-center gap-10 text-white">
 
 
-                        <div class="flex items-center gap-5">
+            <?php
+            $qapprove = $koneksi->query("SELECT * FROM pemesanan WHERE status_pemesanan='pending'");
+            while ($dataApproval = $qapprove->fetch_assoc()) {
+                $qNamaAkun = $koneksi->query("SELECT * FROM akun WHERE id_akun='" . $dataApproval['id_akun'] . "'");
+                $akun = $qNamaAkun->fetch_assoc();
+                $noRaw = $akun['no_hp'];
+                $noHp = '0' . substr($noRaw, 2);
+                $qNamaLapangan = $koneksi->query("SELECT * FROM lapangan WHERE id_lapangan='" . $dataApproval['id_lapangan'] . "'");
+                $lapangan = $qNamaLapangan->fetch_assoc();
+                $qPaket = $koneksi->query("SELECT * FROM paket WHERE id_paket='" . $dataApproval['id_paket'] . "'");
+                $paket = $qPaket->fetch_assoc();
+
+                echo '<div class="flex flex-col border border-yellow-200 shadow-2xs rounded-xl dark:bg-yellow-500/10 dark:border-yellow-500/20">
+                            <div class="p-4 md:p-5">
+                                <div class="flex flex-col md:flex-row md:flex-wrap items-start md:items-center gap-10 text-white">';
+                echo '<div class="flex items-center gap-5">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 5C22 6.65685 20.6569 8 19 8C17.3431 8 16 6.65685 16 5C16 3.34315 17.3431 2 19 2C20.6569 2 22 3.34315 22 5Z" fill="#ffd500" />
@@ -540,13 +632,13 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     fill="#ffd500" />
                             </svg>
                             <div>
-                                <h3 class="font-bold">John Doe</h3>
-                                <h4>Lapangan Metro</h4>
+                                <h3 class="font-bold">' . $akun['nama'] . '</h3>
+                                <h4>' . $lapangan['nama_lapangan'] . '</h4>
                             </div>
-                        </div>
+                        </div>';
 
-                        <!-- Tanggal -->
-                        <div class="flex items-center bg-blue-800 rounded px-2 py-1 w-fit h-fit">
+                echo ' <!-- Tanggal -->
+                        <div class="flex items-center bg-blue-800 rounded px-5 py-2 w-fit h-fit">
                             <svg class="mr-2" width="18" height="18" fill="none" viewBox="0 0 24 24">
                                 <path d="M6.96 2c.418 0 .756.31.756.692v1.397c.671-.012 1.423-.012 2.269-.012h4.032c.846 0 1.598 0 2.269.012V2.692c0-.383.338-.692.756-.692.418 0 .756.31.756.692v1.458c1.451.106 2.403.367 3.103 1.008.7.641.985 1.513 1.101 2.842V9H2V8c.116-1.329.401-2.201 1.101-2.842.7-.641 1.652-.902 3.103-1.008V2.692c0-.383.338-.692.756-.692z"
                                     fill="#fff" />
@@ -555,11 +647,11 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     fill="#fff" />
                                 <path d="M18 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" fill="#fff" />
                             </svg>
-                            Senin, 17 April 2025
-                        </div>
+                            ' . $dataApproval['tanggal_pemesanan'] . '
+                        </div>';
 
-                        <!-- Jam -->
-                        <div class="flex items-center bg-blue-700/10 pr-10 border border-blue-700 rounded px-2 py-1 w-fit h-fit">
+                echo ' <!-- Jam -->
+                        <div class="flex items-center bg-blue-700/10 pr-10 border border-blue-700 rounded px-2 py-2 w-fit h-fit">
                             <svg class="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="none">
                                 <path opacity="0.5"
                                     d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
@@ -568,44 +660,51 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     d="M12 7.25a.75.75 0 01.75.75v3.689l2.28 2.28a.75.75 0 01-1.06 1.061l-2.5-2.5a.75.75 0 01-.22-.53V8a.75.75 0 01.75-.75z"
                                     fill="#fff" />
                             </svg>
-                            09.00 WIB - 12.00 WIB
-                        </div>
+                            ' . $paket['jam_paket'] . '
+                        </div>';
 
-                        <div class="relative inline-block group">
-                            <button type="button" class="bg-[#0d3008] border border-[#237219] p-1.5 rounded-full flex justify-center items-center hover:cursor-pointer">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M17 12C19.7614 12 22 9.76142 22 7C22 4.23858 19.7614 2 17 2C14.2386 2 12 4.23858 12 7C12 7.79984 12.1878 8.55582 12.5217 9.22624C12.6105 9.4044 12.64 9.60803 12.5886 9.80031L12.2908 10.9133C12.1615 11.3965 12.6035 11.8385 13.0867 11.7092L14.1997 11.4114C14.392 11.36 14.5956 11.3895 14.7738 11.4783C15.4442 11.8122 16.2002 12 17 12Z" fill="#129900"></path>
-                                    <path opacity="0.5" d="M8.03759 7.31617L8.6866 8.4791C9.2723 9.52858 9.03718 10.9053 8.11471 11.8278C8.11459 11.8279 6.99588 12.9468 9.02451 14.9755C11.0525 17.0035 12.1714 15.8861 12.1722 15.8853C13.0947 14.9628 14.4714 14.7277 15.5209 15.3134L16.6838 15.9624C18.2686 16.8468 18.4557 19.0692 17.0628 20.4622C16.2258 21.2992 15.2004 21.9505 14.0669 21.9934C12.1588 22.0658 8.91828 21.5829 5.6677 18.3323C2.41713 15.0817 1.93421 11.8412 2.00655 9.93309C2.04952 8.7996 2.7008 7.77423 3.53781 6.93723C4.93076 5.54428 7.15317 5.73144 8.03759 7.31617Z" fill="#129900"></path>
-                                </svg>
-                            </button>
-                            <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-900 text-white text-xs px-2 py-1 rounded z-10 whitespace-nowrap">
-                                Hubungi pemesan
-                            </span>
-                        </div>
-
-
-                        <!-- Tombol Approve dan Tolak -->
-                        <div class="flex gap-2 mt-3 md:mt-0 ml-auto flex-wrap">
-                            <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
-                                    <path fill="#fff" fill-rule="evenodd"
-                                        d="M17.53 6.47a.75.75 0 0 1 0 1.06L13.06 12l4.47 4.47a.75.75 0 0 1-1.06 1.06L12 13.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L10.94 12 6.47 7.53a.75.75 0 0 1 1.06-1.06L12 10.94l4.47-4.47a.75.75 0 0 1 1.06 0Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Tolak
-                            </button>
-                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
-                                    <path fill="#fff" fill-rule="evenodd"
-                                        d="M19.78 6.22a.75.75 0 0 1 0 1.06l-9.25 9.25a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 1 1 1.06-1.06l3.72 3.72 8.72-8.72a.75.75 0 0 1 1.06 0Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Approve
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                echo '<div class=" flex items-center space-x-3 border border-green-900 bg-green-900/20 rounded w-fit h-fit px-3 py-2">
+                <h4 class="">' . $noHp . '</h4>
+                <div class="relative inline-block group">
+                <a target="blank" href="https://api.whatsapp.com/send?phone=' . $akun['no_hp'] . '&text=Halo%20kak%20' . $akun['nama'] . '%2C%20kami%20dari%20IronField%20Badminton.%20Ingin%20mengkonfirmasi%20untuk%20pemesanan%20lapangan%20' . $lapangan['nama_lapangan'] . '%20tanggal%20' . $dataApproval['tanggal_pemesanan'] . '%20pukul%20' . $paket['jam_paket'] . '%20sudah%20di%20approved%20ya.%20Selamat%20Berolahraga." class="bg-[#0d3008] border border-[#237219] p-0.5 rounded-full flex justify-center items-center hover:cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 12C19.7614 12 22 9.76142 22 7C22 4.23858 19.7614 2 17 2C14.2386 2 12 4.23858 12 7C12 7.79984 12.1878 8.55582 12.5217 9.22624C12.6105 9.4044 12.64 9.60803 12.5886 9.80031L12.2908 10.9133C12.1615 11.3965 12.6035 11.8385 13.0867 11.7092L14.1997 11.4114C14.392 11.36 14.5956 11.3895 14.7738 11.4783C15.4442 11.8122 16.2002 12 17 12Z" fill="#129900"></path>
+                        <path opacity="0.5" d="M8.03759 7.31617L8.6866 8.4791C9.2723 9.52858 9.03718 10.9053 8.11471 11.8278C8.11459 11.8279 6.99588 12.9468 9.02451 14.9755C11.0525 17.0035 12.1714 15.8861 12.1722 15.8853C13.0947 14.9628 14.4714 14.7277 15.5209 15.3134L16.6838 15.9624C18.2686 16.8468 18.4557 19.0692 17.0628 20.4622C16.2258 21.2992 15.2004 21.9505 14.0669 21.9934C12.1588 22.0658 8.91828 21.5829 5.6677 18.3323C2.41713 15.0817 1.93421 11.8412 2.00655 9.93309C2.04952 8.7996 2.7008 7.77423 3.53781 6.93723C4.93076 5.54428 7.15317 5.73144 8.03759 7.31617Z" fill="#129900"></path>
+                    </svg>
+                </a>
+                <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-gray-900 text-white text-xs px-2 py-1 rounded z-10 whitespace-nowrap">
+                    Hubungi pemesan
+                </span>
             </div>
+                </div>';
+
+                echo ' ';
+
+                echo '<!-- Tombol Approve dan Tolak -->
+                    <div class="flex gap-2 mt-3 md:mt-0 ml-auto flex-wrap">
+                        <a href="../controller/approvalPemesanan.php?status=rejected&idPemesanan=' . $dataApproval['id_pemesanan'] . '" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                <path fill="#fff" fill-rule="evenodd"
+                                    d="M17.53 6.47a.75.75 0 0 1 0 1.06L13.06 12l4.47 4.47a.75.75 0 0 1-1.06 1.06L12 13.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L10.94 12 6.47 7.53a.75.75 0 0 1 1.06-1.06L12 10.94l4.47-4.47a.75.75 0 0 1 1.06 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Tolak
+                        </a>
+                        <a href="../controller/approvalPemesanan.php?idPemesanan=' . $dataApproval['id_pemesanan'] . '" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                                <path fill="#fff" fill-rule="evenodd"
+                                    d="M19.78 6.22a.75.75 0 0 1 0 1.06l-9.25 9.25a.75.75 0 0 1-1.06 0l-4.25-4.25a.75.75 0 1 1 1.06-1.06l3.72 3.72 8.72-8.72a.75.75 0 0 1 1.06 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Approve
+                        </a>
+                    </div>';
+                echo '</div>
+                    </div>
+                </div>';
+            }
+            ?>
+
 
 
             <!-- End Card -->
@@ -655,15 +754,15 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                             </select>
                                         </div>
 
-                                        
+
                                         <input type="hidden" id="idPemesanan" name="idPemesanan">
 
                                         <div class="relative">
                                             <label for="noHp" class="text-white ml-4 text-sm dark:text-neutral-500">Nomor HP</label>
                                             <div class="mt-.5"></div>
-                                            <input required type="text" id="no_hp" class="peer py-2.5 sm:py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg sm:text-sm focus:border-neutral-700 focus:ring-neutral-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-white dark:placeholder-neutral-500 dark:focus:ring-neutral-700" placeholder="Masukkan nomor hp" name="no_hp">
+                                            <input required disabled type="text" id="no_hp" class="dark:disabled:bg-neutral-800 disabled:text-white peer py-2.5 sm:py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg sm:text-sm focus:border-neutral-700 focus:ring-neutral-700 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-white dark:placeholder-neutral-500 dark:focus:ring-neutral-700" placeholder="Masukkan nomor hp" name="no_hp">
                                             <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
-                                                <svg class="shrink-0 size-5 mt-6 text-gray-500 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <svg class="dark:disabled:text-gray-500 shrink-0 size-5 mt-6 text-gray-500 dark:text-neutral-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                                     <g id="SVGRepo_iconCarrier">
@@ -679,7 +778,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                         <div class="relative text-xl">
                                             <label for="lapangan" class="text-white ml-4 text-sm dark:text-neutral-500">Lapangan</label>
                                             <select id="lapangan" name="lapangan" class="py-3 mt-1.5 px-4 pe-9 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-neutral-700 focus:ring-neutral-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-transparent dark:text-white dark:focus:ring-neutral-600">
-                                                <option selected="" disabled>Pilih Lapangan</option>
+                                                <option selected="">Pilih Lapangan</option>
                                                 <?php
                                                 $a = $koneksi->query("SELECT * FROM lapangan");
                                                 while ($lapangan = $a->fetch_assoc()) {
@@ -779,6 +878,8 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                         </div>
                                     </div>
                                     <input type="hidden" name="id_paket" id="id_paket">
+                                    <label for="disclaimer" class="text-white flex justify-end ml-4 text-sm dark:text-neutral-500">*Pastikan Nama Pemesan Terisi Dengan Benar</label>
+
 
                                 </div>
                                 <div class="flex mt-5 text-white text-sm justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
@@ -895,11 +996,12 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                         $idAkun = $dataPemesanan['id_akun'];
                                         $idLapangan = $dataPemesanan['id_lapangan'];
                                         $idPaket = $dataPemesanan['id_paket'];
-                                        $idPemesanan=$dataPemesanan['id_pemesanan'];
+                                        $idPemesanan = $dataPemesanan['id_pemesanan'];
                                         $qnama = $koneksi->query("SELECT nama FROM akun WHERE id_akun='" . $idAkun . "'");
                                         $namaAkun = $qnama->fetch_assoc()['nama'];
                                         $qhp = $koneksi->query("SELECT no_hp FROM akun WHERE id_akun='" . $idAkun . "'");
-                                        $noHp = $qhp->fetch_assoc()['no_hp'];
+                                        $no = $qhp->fetch_assoc()['no_hp'];
+                                        $noHp = '0' . substr($no, '2');
                                         $qlapangan = $koneksi->query("SELECT nama_lapangan FROM lapangan WHERE id_lapangan='" . $idLapangan . "'");
                                         $namaLapangan = $qlapangan->fetch_assoc()['nama_lapangan'];
                                         $qpaket = $koneksi->query("SELECT nama_paket, jam_paket FROM paket WHERE id_paket='" . $idPaket . "'");
@@ -951,13 +1053,13 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                         echo '<td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-1.5">';
                                         echo '<a href="../controller/hapusPemesanan.php?idPemesanan=' . $dataPemesanan['id_pemesanan'] . '" 
-                                                         onclick="return confirm(\'Yakin ingin menghapus akun ini?\')" 
+                                                         onclick="return confirm(\'Yakin ingin menghapus pemesanan ini?\')" 
                                                          class="inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-red-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-red-500">Hapus</a>';
                                         echo '</div>
                                         </td>';
                                         echo '<td class="size-px whitespace-nowrap">
                                             <div class="px-6 py-1.5">
-                                                <a class="openEditPemesananModal inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" data-idPemesanan="'.$idPemesanan.'" data-idAkun="' . $idAkun . '" data-namaAkun="' . $namaAkun . '" data-noHP="' . $noHp . '" data-idLapangan="' . $idLapangan . '" data-namaLapangan="' . $namaLapangan . '" data-tanggal="' . $dataPemesanan['tanggal_pemesanan'] . '" data-idPaketn="' . $idPaket . '" data-namaPaket="' . $namaPaket . '" data-jamPaket="' . $jamPaket . '" data-status="' . $dataPemesanan['status_pemesanan'] . '">
+                                                <a class="openEditPemesananModal inline-flex hover:cursor-pointer items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500" data-idPemesanan="' . $idPemesanan . '" data-idAkun="' . $idAkun . '" data-namaAkun="' . $namaAkun . '" data-noHP="' . $noHp . '" data-idLapangan="' . $idLapangan . '" data-namaLapangan="' . $namaLapangan . '" data-tanggal="' . $dataPemesanan['tanggal_pemesanan'] . '" data-idPaketn="' . $idPaket . '" data-namaPaket="' . $namaPaket . '" data-jamPaket="' . $jamPaket . '" data-status="' . $dataPemesanan['status_pemesanan'] . '">
                                                     Edit
                                                 </a>
                                             </div>
@@ -978,7 +1080,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                                     <p class="text-sm text-gray-600 dark:text-neutral-400">
                                         <span class="font-semibold text-gray-800 dark:text-neutral-200">
                                             <?php
-                                            $hasil = $koneksi->query("SELECT COUNT(*) AS jumlah FROM pemesanan");
+                                            $hasil = $koneksi->query("SELECT COUNT(*) AS jumlah FROM pemesanan WHERE status_pemesanan='approved'");
                                             $data = $hasil->fetch_assoc();
                                             echo $data['jumlah'];
                                             ?>
@@ -1027,7 +1129,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
 
     <script>
         function updatePemesanan() {
-            const idPemesanan=document.querySelector('input[name="idPemesanan"]').value;
+            const idPemesanan = document.querySelector('input[name="idPemesanan"]').value;
             const idAkun = document.querySelector('select[name="namaPemesan"]').value;
             const noHp = document.querySelector('input[name="no_hp"]').value;
             const lapangan = document.querySelector('select[name="lapangan"]').value;
@@ -1056,7 +1158,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
 
             openEditPemesananBtn.forEach(e => {
                 e.addEventListener('click', () => {
-                    document.querySelector('input[name="idPemesanan"]').value=e.getAttribute('data-idPemesanan');
+                    document.querySelector('input[name="idPemesanan"]').value = e.getAttribute('data-idPemesanan');
                     document.querySelector('select[name="namaPemesan"]').value = e.getAttribute('data-idAkun');
                     document.querySelector('input[name="no_hp"]').value = e.getAttribute('data-noHp');
                     document.querySelector('select[name="lapangan"]').value = e.getAttribute('data-idLapangan');
@@ -1071,7 +1173,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                             paketList.forEach(paketList => {
                                 paketList.innerHTML = "";
 
-                                if (!document.getElementById('label')) {
+                                if (!document.getElementById('labelPaket')) {
                                     const label = document.createElement('label');
                                     label.className = "text-white ml-4 text-sm dark:text-neutral-500";
                                     label.textContent = "Paket"
@@ -1142,9 +1244,9 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
             const idAkun = this.value;
 
             fetch(`../controller/get_nohp.php?id_akun=${idAkun}`)
-                .then(response => response.json())
+                .then(response => response.text())
                 .then(data => {
-                    document.getElementById('no_hp').value = data.no_hp;
+                    document.getElementById('no_hp').value = data;
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -1170,9 +1272,20 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
         document.getElementById('lapangan').addEventListener('change', function() {
             const id_lapangan = this.value;
             const paketList = document.getElementById('paketList');
+            const labelPaket = document.getElementById('labelPaket');
             paketList.innerHTML = "";
             document.getElementById("id_paket").value = "";
-            const label = document.createElement('label');
+
+            if (!document.getElementById('labelPaket')) {
+                const label = document.createElement('labelPaket');
+                label.className = "text-white ml-4 text-sm dark:text-neutral-500";
+                label.textContent = "Paket"
+                label.id = "labelPaket"
+                paketList.innerHTML = "";
+                paketList.parentNode.insertBefore(label, paketList);
+            } else {
+                labelPaket.textContent = "Paket";
+            }
             paketList.innerHTML = "";
 
             fetch(`../controller/get_paket.php?id_lapangan=${id_lapangan}`)
@@ -1182,7 +1295,7 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
                     paketList.forEach(paketList => {
                         paketList.innerHTML = "";
 
-                        if (!document.getElementById('label')) {
+                        if (!document.getElementById('labelPaket')) {
                             const label = document.createElement('label');
                             label.className = "text-white ml-4 text-sm dark:text-neutral-500";
                             label.textContent = "Paket"
@@ -1267,5 +1380,11 @@ $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
             url.searchParams.delete('update');
             window.history.replaceState({}, document.title, url.pathname + url.search);
         });
+        document.querySelector('[data-hs-remove-element="#dismiss-alert"]').addEventListener('click', function() {
+            const url = new URL(window.location);
+            url.searchParams.delete('approval');
+            window.history.replaceState({}, document.title, url.pathname + url.search);
+        });
     </script>
+    
 </body>
