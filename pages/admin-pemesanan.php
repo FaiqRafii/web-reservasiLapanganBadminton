@@ -1,6 +1,6 @@
 <?php
 include '../controller/koneksi.php';
-$pemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE status_pemesanan='approved'");
+$pemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE status_pemesanan='approved' ORDER BY tanggal_pemesanan");
 $qa = $koneksi->query("SELECT id_lapangan, nama_lapangan FROM lapangan");
 ?>
 
