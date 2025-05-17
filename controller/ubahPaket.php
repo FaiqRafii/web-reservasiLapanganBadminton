@@ -9,7 +9,7 @@ $jamSelesai = $_POST['jamSelesai'];
 $jamPaket = $jamMulai . " - " . $jamSelesai;
 $harga=str_replace('.','',$_POST['hargaPaket']);
 
-$update=$koneksi->query("UPDATE paket SET nama_paket='".$namaPaket."',  id_lapangan='".$idLapangan."', jam_paket='".$jamPaket."', harga_paket='".$harga."'");
+$update=$koneksi->query("UPDATE paket SET nama_paket='".$namaPaket."',  id_lapangan='".$idLapangan."', jam_paket='".$jamPaket."', harga_paket='".$harga."' WHERE id_paket='".$idPaket."'");
 
 if($update){
     header("Location:../pages/admin-paket.php?update=sukses");

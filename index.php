@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+include 'controller/koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +45,9 @@
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
+
+    <link rel="stylesheet" href="assets/css/date.css" />
+    <script defer src="assets/js/dateHome.js"></script>
 
     <?php
     error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));

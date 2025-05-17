@@ -1,5 +1,10 @@
 <?php
 include '../controller/koneksi.php';
+
+session_start();
+if($_SESSION['role_akun']!='admin'){
+  header('Location: ../index.php');
+}
 ?>
 
 <html lang="en">

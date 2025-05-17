@@ -57,11 +57,12 @@
 
                     <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                         <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-800">
-                            <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
-                            <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">james@site.com</p>
+                            <!-- <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p> -->
+                            <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['nama_akun'] ?></p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['email_akun'] ?></p>
                         </div>
 
-                        <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
+                        <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="../controller/logout.php">
                             <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -127,7 +128,7 @@
     <div class="relative h-full max-h-full">
         <div class="px-6 pt-4 items-center mt-4">
             <!-- Logo -->
-            <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../home.php" aria-label="Preline">
+            <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../index.php" aria-label="Preline">
                 <img src="../assets/img/logos/logo2.png" alt="" class="w-36 ">
             </a>
             <!-- End Logo -->
@@ -502,8 +503,8 @@
                                             <div class="flex items-center gap-x-3">
                                                 <img class="inline-block size-9.5 rounded-full" src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar">
                                                 <div class="grow">
-                                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">Christina Bersh</span>
-                                                    <span class="block text-sm text-gray-500 dark:text-neutral-500">christina@site.com</span>
+                                                    <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200"><?= $_SESSION['nama_akun'] ?></span>
+                                                    <span class="block text-sm text-gray-500 dark:text-neutral-500"><?= $_SESSION['email_akun'] ?></span>
                                                 </div>
                                             </div>
                                         </div>

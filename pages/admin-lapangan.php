@@ -1,5 +1,10 @@
 <?php
 include '../controller/koneksi.php';
+
+session_start();
+if ($_SESSION['role_akun'] != 'admin') {
+    header('Location: ../index.php');
+}
 $hasil = $koneksi->query("SELECT * FROM lapangan LIMIT 1");
 $dataLapangan = $hasil->fetch_assoc();
 ?>
@@ -160,11 +165,12 @@ $dataLapangan = $hasil->fetch_assoc();
 
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
                             <div class="py-3 px-5 bg-gray-100 rounded-t-lg dark:bg-neutral-800">
-                                <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p>
-                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200">james@site.com</p>
+                                <!-- <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p> -->
+                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['nama_akun'] ?></p>
+                                <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['email_akun'] ?></p>
                             </div>
 
-                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="../controller/logout.php">
                                 <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -230,7 +236,7 @@ $dataLapangan = $hasil->fetch_assoc();
         <div class="relative h-full max-h-full">
             <div class="px-6 pt-4 items-center mt-4">
                 <!-- Logo -->
-                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../home.php" aria-label="Preline">
+                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../index.php" aria-label="Preline">
                     <img src="../assets/img/logos/logo2.png" alt="" class="w-36 ">
                 </a>
                 <!-- End Logo -->
