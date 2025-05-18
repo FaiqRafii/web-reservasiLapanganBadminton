@@ -168,7 +168,7 @@ if ($_SESSION['role_akun'] != 'admin') {
                                 <p class="text-sm font-medium text-gray-800 dark:text-neutral-200"><?= $_SESSION['email_akun'] ?></p>
                             </div>
 
-                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="../controller/logout.php">
+                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="./controller/logout.php">
                                 <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

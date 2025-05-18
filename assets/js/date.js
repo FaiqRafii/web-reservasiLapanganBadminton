@@ -56,7 +56,7 @@ applyBtn.addEventListener("click", () => {
     p.style.pointerEvents = "auto";
   });
 
-  fetch(`..../controller/cek_slot.php?tanggal=${tanggal}`)
+  fetch(`../controller/cek_slot.php?tanggal=${tanggal}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("Slot dari server:", data);
@@ -204,7 +204,7 @@ const createButton = (text, isDisabled = false) => {
     });
 
     fetch(
-      `../controller/cek_slot_tanggal.php?tanggal=${now}&lapangan=${id_lapangan}`
+      `./controller/cek_slot_tanggal.php?tanggal=${now}&lapangan=${id_lapangan}`
     )
       .then((response) => response.json())
       .then((data) => {

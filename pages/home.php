@@ -11,6 +11,10 @@
                     if (empty($_SESSION['nama_akun'])) {
                         echo '<a href="login.php" id="loginBtn" class=" text-neutral-800 dark:text-white hover:bg-neutral-50 focus:ring-4 focus:ring-neutral-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 dark:hover:bg-[#990000] focus:outline-none dark:focus:ring-neutral-800">Log in</a>';
                     } else {
+                        $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESSION['id_akun'] . "'");
+                        $pemesanan = $qPemesanan->fetch_assoc();
+                        $jumlahPemesanan = $qPemesanan->num_rows;
+
                         echo '
                         <div class="relative">
                         <div id="profileAkun" class="w-10 h-10 hover:cursor-pointer">
@@ -25,14 +29,25 @@
                             </svg>
                         </div>
 
-                        <div id="dropdownProfile" class="hidden h-30 w-40 bg-neutral-900 absolute right-1 top-12 rounded-lg">
+                        <div id="dropdownProfile" class="hidden h-40 w-40 bg-neutral-900 absolute right-1 top-12 rounded-lg">
                             <div class="py-3 px-5 bg-neutral-100 rounded-t-lg dark:bg-neutral-900">
                                 <!-- <p class="text-sm text-neutral-500 dark:text-neutral-500">Signed in as</p> -->
                                 <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">' . $_SESSION['nama_akun'] . '</p>
                                 <p class="text-sm font-medium text-neutral-800 dark:text-neutral-200">' . $_SESSION['email_akun'] . '</p>
                             </div>
 
-                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="../controller/logout.php">
+                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="./pages/user-pemesanan.php">
+                                <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
+                                        <path d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </g>
+                                </svg>
+                                Pemesanan <span class="text-xs">' . $jumlahPemesanan . '</span>
+                            </a>
+                            <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="./controller/logout.php">
                                 <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -174,18 +189,18 @@
     <div class="h-full w-full grid grid-rows-2 gap-y-4">
         <div class="grid grid-cols-[45%_55%] h-47">
             <div class="pr-3 overflow-hidden">
-                <img src="../images/lapangan/' . $lapangan1['foto1'] . '" class="object-cover h-full w-full rounded-lg" alt="">
+                <img src="./images/lapangan/' . $lapangan1['foto1'] . '" class="object-cover h-full w-full rounded-lg" alt="">
             </div>
             <div class="pl-3 overflow-hidden">
-                <img src="../images/lapangan/' . $lapangan1['foto2'] . '" class="object-cover h-full w-full rounded-lg" alt="">
+                <img src="./images/lapangan/' . $lapangan1['foto2'] . '" class="object-cover h-full w-full rounded-lg" alt="">
             </div>
         </div>
         <div class="grid grid-cols-[55%_45%] h-47">
             <div class="pr-3 overflow-hidden">
-                <img src="../images/lapangan/' . $lapangan2['foto1'] . '" class="object-cover h-full w-full rounded-lg" alt="">
+                <img src="./images/lapangan/' . $lapangan2['foto1'] . '" class="object-cover h-full w-full rounded-lg" alt="">
             </div>
             <div class="pl-3 overflow-hidden">
-                <img src="../images/lapangan/' . $lapangan2['foto2'] . '" class="object-cover h-full w-full rounded-lg" alt="">
+                <img src="./images/lapangan/' . $lapangan2['foto2'] . '" class="object-cover h-full w-full rounded-lg" alt="">
             </div>
         </div>
     </div>
@@ -194,7 +209,7 @@
                     $lapangan = $qLapangan->fetch_assoc();
                     echo '
     <div class="h-96 w-full overflow-hidden rounded-lg">
-        <img src="../images/lapangan/' . $lapangan['foto1'] . '" class="object-cover h-full w-full" alt="">
+        <img src="./images/lapangan/' . $lapangan['foto1'] . '" class="object-cover h-full w-full" alt="">
     </div>
     ';
                 }
