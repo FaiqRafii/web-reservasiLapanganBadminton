@@ -38,10 +38,10 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Title -->
-    <title>Tailwind CSS Admin Template | Preline UI, crafted with Tailwind CSS</title>
+    <title>IronField | Pemesanan</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logos/logo.png">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -98,28 +98,12 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
                 <div class="hidden md:block">
                     <!-- Search Input -->
                     <div class="relative">
-                        <div class="text-xl text-white pt-3">Dashboard</div>
+                        <div class="text-xl text-white pt-3">Pemesanan</div>
                     </div>
                     <!-- End Search Input -->
                 </div>
 
                 <div class="flex flex-row items-center justify-end gap-1">
-                    <button type="button" class="md:hidden size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
-                        <span class="sr-only">Search</span>
-                    </button>
-
-                    <button type="button" class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                        </svg>
-                        <span class="sr-only">Notifications</span>
-                    </button>
-
                     <!-- Dropdown -->
                     <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
                         <button id="hs-dropdown-account" type="button" class="size-9.5 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none dark:text-white" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
@@ -186,7 +170,7 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
                     </svg>
                 </li>
                 <li class="text-sm font-semibold text-gray-800 truncate dark:text-neutral-400" aria-current="page">
-                    Dashboard
+                    Pemesanan
                 </li>
             </ol>
             <!-- End Breadcrumb -->
@@ -207,8 +191,8 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
         <div class="relative h-full max-h-full">
             <div class="px-6 pt-4 items-center mt-4">
                 <!-- Logo -->
-                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../index.php" aria-label="Preline">
-                    <img src="../assets/img/logos/logo2.png" alt="" class="w-36 ">
+                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../" aria-label="Preline">
+                    <img src="../assets/img/logos/logo2.png" alt="" class="w-36">
                 </a>
                 <!-- End Logo -->
             </div>
@@ -256,6 +240,7 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
 
                     $qrData = [
                         "id_pemesanan" => $idPemesanan,
+                        "nama_pemesan" => $namaAkun,
                         "nama_paket" => $paket['nama_paket'],
                         "lapangan" => $namaLapangan,
                         "tanggal_pemesanan" => $pemesanan['tanggal_pemesanan'],
@@ -282,20 +267,38 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
             </div>
             <div>
                 <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:';
-                if($pemesanan['status_pemesanan']=='approved'){
-                    echo 'bg-teal-500/10 dark:text-teal-500"';
-                }else{
-                    echo 'bg-yellow-500/10 dark:text-yellow-500"';
-                }
-                echo'>'
+                    if ($pemesanan['status_pemesanan'] == 'approved') {
+                        echo 'bg-teal-500/10 dark:text-teal-500"';
+                    } else {
+                        echo 'bg-yellow-500/10 dark:text-yellow-500"';
+                    }
+                    echo '>'
                         . ucwords($pemesanan['status_pemesanan']) . '
                 </span>
             </div>
         </div>
-        <div class="flex justify-center items-center mt-15">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='. $encodedQr.'" alt="QR Code">
-        </div>
-    </div>';
+        ';
+        if($pemesanan['status_pemesanan']=='approved'){
+            echo'
+            <div class="flex justify-center items-center mt-10">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $encodedQr . '" alt="QR Code">
+            </div>
+            <a href="tiket.php?id='.$pemesanan['id_pemesanan'].'" >
+                            <div class="mt-7 mx-auto flex gap-x-1 justify-center items-center bg-green-600 text-white border border-neutral-700 w-fit h-fit px-4 py-0.5 rounded-lg hover:bg-green-700 transition-all ease-in duration-100">
+                                <svg viewBox="0 0 24 24" class="w-4 h-fit" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g id="Interface / Download">
+                                            <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                Cetak Tiket
+                            </div>
+                        </a>
+        </div>';
+        }
                 }
                 ?>
 

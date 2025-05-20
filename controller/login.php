@@ -16,14 +16,15 @@ if (!$qCredentials->num_rows > 0) {
     if (!$isLogin) {
         header('Location: ../login.php?status=paswordSalah');
     } else {
-        $_SESSION['id_akun']=$credential['id_akun'];
-        $_SESSION['nama_akun']=$credential['nama'];
-        $_SESSION['email_akun']=$credential['email'];
-        $_SESSION['no_hp_akun']=$credential['no_hp'];
-        $_SESSION['role_akun']=$credential['role'];
-        if($credential['role']=='admin'){
+        $_SESSION['isLogin'] = true;
+        $_SESSION['id_akun'] = $credential['id_akun'];
+        $_SESSION['nama_akun'] = $credential['nama'];
+        $_SESSION['email_akun'] = $credential['email'];
+        $_SESSION['no_hp_akun'] = $credential['no_hp'];
+        $_SESSION['role_akun'] = $credential['role'];
+        if ($credential['role'] == 'admin') {
             header('Location: ../pages/admin.php');
-        }else{
+        } else {
             header('Location: ../index.php');
         }
     }

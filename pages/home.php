@@ -2,7 +2,7 @@
     <header class="fixed w-full z-50">
         <nav class="bg-white border-neutral-200 py-2.5 dark:bg-black">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-                <a href="#" class="flex items-center">
+                <a href="" class="flex items-center">
                     <img src="./assets/img/logos/logo.png" class="h-6 mr-2 sm:h-7" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">IronField</span>
                 </a>
@@ -37,14 +37,10 @@
                             </div>
 
                             <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="./pages/user-pemesanan.php">
-                                <svg viewBox="0 0 24 24" fill="none" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
-                                        <path d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </g>
-                                </svg>
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                        </svg>
                                 Pemesanan <span class="text-xs">' . $jumlahPemesanan . '</span>
                             </a>
                             <a class="flex items-center gap-x-3.5 py-2 mb-2 px-3 rounded-lg text-sm text-neutral-800 hover:bg-neutral-100 focus:outline-hidden focus:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="./controller/logout.php">
@@ -100,8 +96,11 @@
     </header>
 
     <!-- Start block -->
-    <section class="bg-white dark:bg-black">
+    <section class="bg-white dark:bg-black relative">
+
         <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-11 lg:pt-28">
+
+
             <div class="mr-auto mt-14 place-self-center lg:col-span-7">
                 <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">#1 Badminton Field<br>In Town</h1>
                 <p class="max-w-2xl mb-6 font-light text-neutral-500 lg:mb-8 md:text-lg lg:text-xl dark:text-neutral-400">Step into a world of speed, agility, and excitement at our professional-grade badminton court. Designed for both beginners and seasoned players</p>
@@ -489,7 +488,7 @@
                             <h3 class="mb-4 text-2xl font-semibold">' . $paket['nama_paket'] . '</h3>
                             <p class="font-light text-neutral-500 sm:text-lg dark:text-neutral-400">' . substr($paket['jam_paket'], 0, 5) . ' WIB - ' . substr($paket['jam_paket'], 8, 5) . ' WIB</p>
                             <div class="flex items-baseline justify-center my-8">
-                                <span class="mr-2 text-3xl font-extrabold">Rp65.000</span>
+                                <span class="mr-2 text-3xl font-extrabold">Rp' . number_format($paket['harga_paket'], 0, ',', '.') . '</span>
                             </div>
                             <!-- List -->
                             <ul role="list" class="mb-8 space-y-4 text-left">
@@ -522,7 +521,7 @@
                                     <span>Alas Lapangan Karpet
                                 </li>
                             </ul>
-                            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button" class="hover:cursor-pointer book-button text-white bg-[#990000] hover:bg-red-700 focus:ring-4 focus:ring-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-red-700" onClick=openModal()>Book Now</button>
+                            <button id="openModal" type="button" class="hover:cursor-pointer book-button text-white bg-[#990000] hover:bg-red-700 focus:ring-4 focus:ring-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-red-700">Book Now</button>
                         </div>
                         ';
                 }
@@ -709,7 +708,7 @@
             <div class="max-w-screen-md mx-auto">
                 <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-[#1a1a1a] text-neutral-900 dark:text-white" data-inactive-classes="text-neutral-500 dark:text-neutral-400">
                     <h3 id="accordion-flush-heading-1">
-                        <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-[#1a1a1a] bg-white border-b border-neutral-200 dark:border-[#1a1a1a] dark:bg-[#1a1a1a] dark:text-white" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                        <button type="button" class="hover:cursor-pointer flex items-center justify-between w-full py-5 font-medium text-left text-[#1a1a1a] bg-white border-b border-neutral-200 dark:border-[#1a1a1a] dark:bg-[#1a1a1a] dark:text-white" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
                             <span>Ada penyewaan raket nya ngga?</span>
                             <svg data-accordion-icon="" class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -723,7 +722,7 @@
                         </div>
                     </div>
                     <h3 id="accordion-flush-heading-2">
-                        <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-neutral-500 border-b border-neutral-200 dark:border-[#1a1a1a] dark:text-[#1a1a1a]" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                        <button type="button" class="hover:cursor-pointer flex items-center justify-between w-full py-5 font-medium text-left text-neutral-500 border-b border-neutral-200 dark:border-[#1a1a1a] dark:text-[#1a1a1a]" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
                             <span>Apa bisa reschedule hari dan jam pemesanan?</span>
                             <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -797,120 +796,128 @@
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
 
     <script>
-        const profile = document.getElementById('profileAkun');
-        const dropdown = document.getElementById('dropdownProfile');
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (isset($_SESSION['isLogin']) || $_SESSION['isLogin'] === true): ?>
+                const profile = document.getElementById('profileAkun');
+                const dropdown = document.getElementById('dropdownProfile');
 
-        profile.addEventListener('click', () => {
-            dropdown.classList.toggle('hidden');
-        });
-    </script>
+                profile.addEventListener('click', () => {
+                    dropdown.classList.toggle('hidden');
+                });
 
-    <script>
-        function openModal() {
-            const nama = "<?= $_SESSION['nama_akun'] ?>";
-            const noHp = "<?= '0' . substr($_SESSION['no_hp_akun'], 2) ?>";
-            const idAkun = "<?= $_SESSION['id_akun'] ?>";
-            document.querySelector('input[name="id_akun"]').value = idAkun;
-            document.querySelector('input[name="nama"]').value = nama;
-            document.querySelector('input[name="no_hp"]').value = noHp;
-            document.getElementById('addPemesananModal').classList.remove('hidden');
-        }
+                document.getElementById('closeAddPemesananModal').addEventListener('click', () => {
+                    document.getElementById('addPemesananModal').classList.add('hidden');
+                });
 
-        document.getElementById('closeAddPemesananModal').addEventListener('click', () => {
-            document.getElementById('addPemesananModal').classList.add('hidden');
-        });
+                document.getElementById('inputLapangan').addEventListener('change', function() {
+                    const id_lapangan = this.value;
+                    console.log(id_lapangan);
+                    const paketList = document.getElementById('paketList');
+                    const labelPaket = document.getElementById('labelPaket');
+                    paketList.innerHTML = "";
+                    document.getElementById("id_paket").value = "";
 
-        document.getElementById('inputLapangan').addEventListener('change', function() {
-            const id_lapangan = this.value;
-            console.log(id_lapangan);
-            const paketList = document.getElementById('paketList');
-            const labelPaket = document.getElementById('labelPaket');
-            paketList.innerHTML = "";
-            document.getElementById("id_paket").value = "";
-
-            if (!document.getElementById('labelPaket')) {
-                const label = document.createElement('labelPaket');
-                label.className = "text-white ml-4 text-sm dark:text-neutral-500";
-                label.textContent = "Paket"
-                label.id = "labelPaket"
-                paketList.innerHTML = "";
-                paketList.parentNode.insertBefore(label, paketList);
-            } else {
-                labelPaket.textContent = "Paket";
-            }
-            paketList.innerHTML = "";
-
-            fetch(`controller/get_paket.php?id_lapangan=${id_lapangan}`)
-                .then(response => response.json())
-                .then(data => {
-                    const paketList = document.querySelectorAll("#paketList");
-                    paketList.forEach(paketList => {
+                    if (!document.getElementById('labelPaket')) {
+                        const label = document.createElement('labelPaket');
+                        label.className = "text-white ml-4 text-sm dark:text-neutral-500";
+                        label.textContent = "Paket"
+                        label.id = "labelPaket"
                         paketList.innerHTML = "";
+                        paketList.parentNode.insertBefore(label, paketList);
+                    } else {
+                        labelPaket.textContent = "Paket";
+                    }
+                    paketList.innerHTML = "";
 
-                        if (!document.getElementById('labelPaket')) {
-                            const label = document.createElement('label');
-                            label.className = "text-white ml-4 text-sm dark:text-neutral-500";
-                            label.textContent = "Paket"
-                            label.id = "labelPaket"
-                            paketList.innerHTML = "";
-                            paketList.parentNode.insertBefore(label, paketList);
-                        }
+                    fetch(`controller/get_paket.php?id_lapangan=${id_lapangan}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const paketList = document.querySelectorAll("#paketList");
+                            paketList.forEach(paketList => {
+                                paketList.innerHTML = "";
 
-
-                        data.forEach(paket => {
-                            const div = document.createElement('div');
-                            div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
-                            div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
-                            div.dataset.idPaket = paket.id_paket;
-
-                            div.addEventListener("click", function() {
-                                const inputPaket = document.getElementById("id_paket");
-                                inputPaket.value = this.dataset.idPaket;
-
-                                document.querySelectorAll("#paketList div").forEach(d => {
-                                    d.classList.remove("bg-[#237219]");
-                                    d.classList.add("bg-[#0a2008]");
-                                });
-                                this.classList.remove("bg-[#0a2008]");
-                                this.classList.add("bg-[#237219]");
-
-                                if (inputPaket.value === "") {
-                                    inputPaket.value = null;
+                                if (!document.getElementById('labelPaket')) {
+                                    const label = document.createElement('label');
+                                    label.className = "text-white ml-4 text-sm dark:text-neutral-500";
+                                    label.textContent = "Paket"
+                                    label.id = "labelPaket"
+                                    paketList.innerHTML = "";
+                                    paketList.parentNode.insertBefore(label, paketList);
                                 }
 
-                                console.log("id_paket terpilih:", inputPaket.value);
+
+                                data.forEach(paket => {
+                                    const div = document.createElement('div');
+                                    div.className = "w-fit h-fit py-2 px-3 rounded-lg border bg-[#0a2008] hover:bg-[#237219] hover:cursor-pointer border-[#237219]";
+                                    div.textContent = paket.nama_paket + " (" + paket.jam_paket + ")";
+                                    div.dataset.idPaket = paket.id_paket;
+
+                                    div.addEventListener("click", function() {
+                                        const inputPaket = document.getElementById("id_paket");
+                                        inputPaket.value = this.dataset.idPaket;
+
+                                        document.querySelectorAll("#paketList div").forEach(d => {
+                                            d.classList.remove("bg-[#237219]");
+                                            d.classList.add("bg-[#0a2008]");
+                                        });
+                                        this.classList.remove("bg-[#0a2008]");
+                                        this.classList.add("bg-[#237219]");
+
+                                        if (inputPaket.value === "") {
+                                            inputPaket.value = null;
+                                        }
+
+                                        console.log("id_paket terpilih:", inputPaket.value);
+                                    });
+
+                                    paketList.appendChild(div);
+                                });
+
+                            });
+                        });
+                });
+
+
+
+                document.getElementById('inputTanggal').addEventListener('change', function() {
+                    const tanggalSelected = this.value;
+                    // console.log("tanggalSelected: ", tanggalSelected);
+
+                    fetch(`controller/cek_slot.php?tanggal=${tanggalSelected}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            // console.log("Slot dari server:", data);
+                            data.forEach(slot => {
+                                document.querySelectorAll('#paketList div').forEach(p => {
+                                    console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
+                                    if (p.dataset.idPaket == slot.id_paket) {
+                                        p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border", "hover:cursor-pointer");
+                                        p.classList.add("bg-neutral-700");
+                                        p.style.pointerEvents = "none";
+                                    }
+                                });
                             });
 
-                            paketList.appendChild(div);
+
                         });
-
-                    });
                 });
-        });
+            <?php endif; ?>
 
-
-
-        document.getElementById('inputTanggal').addEventListener('change', function() {
-            const tanggalSelected = this.value;
-            // console.log("tanggalSelected: ", tanggalSelected);
-
-            fetch(`controller/cek_slot.php?tanggal=${tanggalSelected}`)
-                .then(response => response.json())
-                .then(data => {
-                    // console.log("Slot dari server:", data);
-                    data.forEach(slot => {
-                        document.querySelectorAll('#paketList div').forEach(p => {
-                            console.log("Cek div dengan id_paket =", p.dataset.idPaket, "vs", slot.id_paket);
-                            if (p.dataset.idPaket == slot.id_paket) {
-                                p.classList.remove("bg-[#0a2008]", "hover:bg-[#237219]", "border", "hover:cursor-pointer");
-                                p.classList.add("bg-neutral-700");
-                                p.style.pointerEvents = "none";
-                            }
-                        });
-                    });
-
-
-                });
-        });
+            document.querySelectorAll('#openModal').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    <?php if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] !== true): ?>
+                        window.location.href = "login.php";
+                    <?php else: ?>
+                        const nama = "<?= $_SESSION['nama_akun'] ?>";
+                        const noHp = "<?= '0' . substr($_SESSION['no_hp_akun'], 2) ?>";
+                        const idAkun = "<?= $_SESSION['id_akun'] ?>";
+                        document.querySelector('input[name="id_akun"]').value = idAkun;
+                        document.querySelector('input[name="nama"]').value = nama;
+                        document.querySelector('input[name="no_hp"]').value = noHp;
+                        document.getElementById('addPemesananModal').classList.remove('hidden');
+                    <?php endif; ?>
+                })
+            })
+        })
     </script>
 </body>

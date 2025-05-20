@@ -43,10 +43,10 @@ if ($_SESSION['role_akun'] != 'admin') {
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Title -->
-    <title>Tailwind CSS Akun Template | Preline UI, crafted with Tailwind CSS</title>
+    <title>Admin | Akun</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logos/logo.png">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -131,21 +131,41 @@ if ($_SESSION['role_akun'] != 'admin') {
                 </div>
 
                 <div class="flex flex-row items-center justify-end gap-1">
-                    <button type="button" class="md:hidden size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8" />
-                            <path d="m21 21-4.3-4.3" />
-                        </svg>
-                        <span class="sr-only">Search</span>
-                    </button>
+                    <div class="hs-dropdown [--placement:bottom-right] relative inline-flex justify-center">
+                        <button type="button" class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                            </svg>
+                            <?php
+                            $qNotif = $koneksi->query("SELECT COUNT(*) AS jumlah FROM pemesanan WHERE status_pemesanan='pending'");
+                            $jumlah = $qNotif->fetch_assoc()['jumlah'];
 
-                    <button type="button" class="size-9.5 relative inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
-                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                        </svg>
-                        <span class="sr-only">Notifications</span>
-                    </button>
+                            if ($jumlah > 0) {
+                                echo '
+                            <div class="bg-red-700 w-2 h-2 rounded-full absolute left-1.5 bottom-1"></div>
+                            ';
+                            }
+                            ?>
+                        </button>
+
+                        <?php
+                        if ($jumlah > 0) {
+                            echo '
+                        <div class="hs-dropdown-menu pt-2 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden max-w-60 bg-white shadow-md rounded-lg mt-2 dark:bg-neutral-800 dark:border dark:border-neutral-700 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-account">
+                        <a class="flex justify-center items-center gap-x-3.5 px-5 py-2 mb-2 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300" href="../pages/admin-pemesanan.php">
+                            <!-- <p class="text-sm text-gray-500 dark:text-neutral-500">Signed in as</p> -->
+                            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                            </svg>
+                            <p class="text-sm font-bold text-gray-800 dark:text-neutral-200">' . $jumlah . '<span class="font-thin"> Pesanan Baru</span></p>
+                        </a>
+                    </div>
+                        ';
+                        }
+                        ?>
+                    </div>
 
                     <!-- Dropdown -->
                     <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
@@ -237,7 +257,7 @@ if ($_SESSION['role_akun'] != 'admin') {
         <div class="relative h-full max-h-full">
             <div class="px-6 pt-4 items-center mt-4">
                 <!-- Logo -->
-                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../index.php" aria-label="Preline">
+                <a class="rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80" href="../" aria-label="Preline">
                     <img src="../assets/img/logos/logo2.png" alt="" class="w-36 ">
                 </a>
                 <!-- End Logo -->

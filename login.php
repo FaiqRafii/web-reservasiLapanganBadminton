@@ -45,7 +45,7 @@
                         <input type="password" id="password" name="password" class="bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-700 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
                     </div>
                     <div class="flex justify-center items-center">
-                        <input type="submit" class="bg-gradient-to-bl from-red-700 to-red-900 hover:bg-gradient-to-tr  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">
+                        <input type="submit" value="Login" class="bg-gradient-to-bl from-red-700 to-red-900 hover:bg-gradient-to-tr  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">
                     </div>
                 </form>
             </div>

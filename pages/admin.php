@@ -36,10 +36,10 @@ if($_SESSION['role_akun']!='admin'){
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <!-- Title -->
-  <title>Tailwind CSS Admin Template | Preline UI, crafted with Tailwind CSS</title>
+  <title>Admin | Dashboard</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logos/logo.png">
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
