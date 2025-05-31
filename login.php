@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IronField | Login</title>
+    <link rel="shortcut icon" href="assets/img/logos/logo.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
@@ -13,13 +14,13 @@
 <body class="bg-gradient-to-t from-black to-neutral-900">
     <div class="flex justify-center items-center h-full">
         <div class="w-2/6 h-fit pb-25 rounded-2xl bg-black border border-neutral-900 shadow-2xl">
-            <div class="flex justify-center items-center w-full mt-15">
+            <a href="./" class="flex justify-center items-center w-full mt-15">
                 <img src="assets/img/logos/logo2.png" class="w-35 h-fit" alt="">
-            </div>
+            </a>
             <div class="mt-5 px-10">
                 <form action="controller/login.php" method="POST">
                     <div class="flex justify-center items-center mb-5">
-                        <h1 class=" font-bold text-xl">Login</h1>
+                        <h1 class=" font-bold text-xl text-white">Login</h1>
                     </div>
                     <label for="input-group-1" class="block mb-2 text-sm  text-neutral-600">Email</label>
                     <div class="relative mb-4">
@@ -32,7 +33,7 @@
                         <input type="email" id="email" name="email" class="bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-700 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="name@gmail.com">
                     </div>
                     <label for="input-group-1" class="block mb-3 text-sm  text-neutral-600">Password</label>
-                    <div class="relative mb-8">
+                    <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                             <svg viewBox="0 0 24 24" class="w-5 h-5 text-neutral-700" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -43,6 +44,9 @@
                             </svg>
                         </div>
                         <input type="password" id="password" name="password" class="bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-700 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
+                    </div>
+                    <div class="text-neutral-700 text-xs mb-8">
+                        <div>Belum punya akun?<span class="text-neutral-600 hover:font-semibold hover:cursor-pointer hover:text-red-500"><a href="register.php"> Daftar</a></span></div>
                     </div>
                     <div class="flex justify-center items-center">
                         <input type="submit" value="Login" class="bg-gradient-to-bl from-red-700 to-red-900 hover:bg-gradient-to-tr  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">

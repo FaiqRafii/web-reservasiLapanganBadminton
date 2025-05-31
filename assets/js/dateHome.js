@@ -30,21 +30,27 @@ document.addEventListener("click", (e) => {
   }
 });
 
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
+
 // handle apply button click event
 applyBtn.addEventListener("click", () => {
-  // set the selected date to date input
-  dateInput.value = selectedDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+  const formatted = formatDate(selectedDate);
+  dateInput.value = formatted;
+  document.getElementById("inputTanggal").value = formatted;
 
-  // hide datepicker
   datepicker.hidden = true;
 
-  const tanggal = document.getElementById("inputTanggal").value;
+  const tanggal = formatted;
+
   console.log(tanggal);
 
+  // Aktifkan semua slot
   document.querySelectorAll("#paketList div").forEach((p) => {
     p.classList.add(
       "bg-[#0a2008]",
@@ -56,18 +62,13 @@ applyBtn.addEventListener("click", () => {
     p.style.pointerEvents = "auto";
   });
 
+  // Fetch data untuk tanggal terpilih
   fetch(`controller/cek_slot.php?tanggal=${tanggal}`)
     .then((response) => response.json())
     .then((data) => {
       console.log("Slot dari server:", data);
       data.forEach((slot) => {
         document.querySelectorAll("#paketList div").forEach((p) => {
-          console.log(
-            "Cek div dengan id_paket =",
-            p.dataset.idPaket,
-            "vs",
-            slot.id_paket
-          );
           if (p.dataset.idPaket == slot.id_paket) {
             p.classList.remove(
               "bg-[#0a2008]",
@@ -177,13 +178,15 @@ const displayDates = () => {
   }
 };
 
-document.getElementById("inputLapangan").addEventListener("change", function () {
-  // Simpan id_lapangan baru yang dipilih
-  window.id_lapangan = this.value;
+document
+  .getElementById("inputLapangan")
+  .addEventListener("change", function () {
+    // Simpan id_lapangan baru yang dipilih
+    window.id_lapangan = this.value;
 
-  // Ulangi render tanggal
-  displayDates();
-});
+    // Ulangi render tanggal
+    displayDates();
+  });
 
 const createButton = (text, isDisabled = false) => {
   const button = document.createElement("button");

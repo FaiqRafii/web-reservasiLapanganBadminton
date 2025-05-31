@@ -222,7 +222,20 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
+
                 <?php
+                if ($qPemesanan->num_rows < 1) {
+                    echo '
+                    <div class="col-span-2 w-full flex items-center justify-center mt-5">
+                    <div>
+                    <img src="../assets/img/no-order (1).svg" class="w-80 h-80 mx-auto" alt="">
+                    <div class="text-4xl text-neutral-600 font-semibold">
+                        Belum Ada Pemesanan
+                    </div>
+                    </div>
+                </div>
+                    ';
+                }
                 while ($pemesanan = $qPemesanan->fetch_assoc()) {
                     $idAkun = $pemesanan['id_akun'];
                     $idLapangan = $pemesanan['id_lapangan'];
@@ -278,12 +291,12 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
             </div>
         </div>
         ';
-        if($pemesanan['status_pemesanan']=='approved'){
-            echo'
+                    if ($pemesanan['status_pemesanan'] == 'approved') {
+                        echo '
             <div class="flex justify-center items-center mt-10">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $encodedQr . '" alt="QR Code">
             </div>
-            <a href="tiket.php?id='.$pemesanan['id_pemesanan'].'" >
+            <a href="tiket.php?id=' . $pemesanan['id_pemesanan'] . '" >
                             <div class="mt-7 mx-auto flex gap-x-1 justify-center items-center bg-green-600 text-white border border-neutral-700 w-fit h-fit px-4 py-0.5 rounded-lg hover:bg-green-700 transition-all ease-in duration-100">
                                 <svg viewBox="0 0 24 24" class="w-4 h-fit" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -298,7 +311,7 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
                             </div>
                         </a>
         </div>';
-        }
+                    }
                 }
                 ?>
 

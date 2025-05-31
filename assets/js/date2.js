@@ -30,14 +30,18 @@ document.addEventListener("click", (e) => {
   }
 });
 
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
+
 // handle apply button click event
 applyBtn.addEventListener("click", () => {
   // set the selected date to date input
-  dateInput.value = selectedDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+  dateInput.value = formatDate(selectedDate);
 
   // hide datepicker
   datepicker.hidden = true;
