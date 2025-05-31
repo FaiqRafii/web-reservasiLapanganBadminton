@@ -235,84 +235,88 @@ $qPemesanan = $koneksi->query("SELECT * FROM pemesanan WHERE id_akun='" . $_SESS
                     </div>
                 </div>
                     ';
-                }
-                while ($pemesanan = $qPemesanan->fetch_assoc()) {
-                    $idAkun = $pemesanan['id_akun'];
-                    $idLapangan = $pemesanan['id_lapangan'];
-                    $idPaket = $pemesanan['id_paket'];
-                    $idPemesanan = $pemesanan['id_pemesanan'];
+                } else {
+                    while ($pemesanan = $qPemesanan->fetch_assoc()) {
+                        $idAkun = $pemesanan['id_akun'];
+                        $idLapangan = $pemesanan['id_lapangan'];
+                        $idPaket = $pemesanan['id_paket'];
+                        $idPemesanan = $pemesanan['id_pemesanan'];
 
-                    $qnama = $koneksi->query("SELECT nama FROM akun WHERE id_akun='" . $idAkun . "'");
-                    $namaAkun = $qnama->fetch_assoc()['nama'];
+                        $qnama = $koneksi->query("SELECT nama FROM akun WHERE id_akun='" . $idAkun . "'");
+                        $namaAkun = $qnama->fetch_assoc()['nama'];
 
-                    $qlapangan = $koneksi->query("SELECT nama_lapangan FROM lapangan WHERE id_lapangan='" . $idLapangan . "'");
-                    $namaLapangan = $qlapangan->fetch_assoc()['nama_lapangan'];
+                        $qlapangan = $koneksi->query("SELECT nama_lapangan FROM lapangan WHERE id_lapangan='" . $idLapangan . "'");
+                        $namaLapangan = $qlapangan->fetch_assoc()['nama_lapangan'];
 
-                    $qpaket = $koneksi->query("SELECT nama_paket, jam_paket FROM paket WHERE id_paket='" . $idPaket . "'");
-                    $paket = $qpaket->fetch_assoc();
+                        $qpaket = $koneksi->query("SELECT nama_paket, jam_paket FROM paket WHERE id_paket='" . $idPaket . "'");
+                        $paket = $qpaket->fetch_assoc();
 
-                    $qrData = [
-                        "id_pemesanan" => $idPemesanan,
-                        "nama_pemesan" => $namaAkun,
-                        "nama_paket" => $paket['nama_paket'],
-                        "lapangan" => $namaLapangan,
-                        "tanggal_pemesanan" => $pemesanan['tanggal_pemesanan'],
-                        "jam_paket" => $paket['jam_paket'],
-                        "status_pemesanan" => $pemesanan['status_pemesanan']
-                    ];
+                        $qrData = [
+                            "id_pemesanan" => $idPemesanan,
+                            "nama_pemesan" => $namaAkun,
+                            "nama_paket" => $paket['nama_paket'],
+                            "lapangan" => $namaLapangan,
+                            "tanggal_pemesanan" => $pemesanan['tanggal_pemesanan'],
+                            "jam_paket" => $paket['jam_paket'],
+                            "status_pemesanan" => $pemesanan['status_pemesanan']
+                        ];
 
-                    $sizeQr = 300;
-                    $jsonQr = json_encode($qrData, JSON_UNESCAPED_UNICODE);
-                    $encodedQr = urlencode($jsonQr);
-                    echo '
-    <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
-        <div class="flex flex-wrap justify-between items-center gap-2">
-            <div>
-                <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">Paket ' . $paket['nama_paket'] . '</p>
-                <p class="text-base sm:text-sm text-gray-800 dark:text-neutral-200">Lapangan ' . $namaLapangan . '</p>
-            </div>
-            <div>
-                <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">|</p>
-            </div>
-            <div>
-                <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">' . $pemesanan['tanggal_pemesanan'] . '</p>
-                <p class="text-base sm:text-sm text-gray-800 dark:text-neutral-200">' . $paket['jam_paket'] . '</p>
-            </div>
-            <div>
-                <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:';
-                    if ($pemesanan['status_pemesanan'] == 'approved') {
-                        echo 'bg-teal-500/10 dark:text-teal-500"';
-                    } else {
-                        echo 'bg-yellow-500/10 dark:text-yellow-500"';
-                    }
-                    echo '>'
-                        . ucwords($pemesanan['status_pemesanan']) . '
-                </span>
-            </div>
-        </div>
-        ';
-                    if ($pemesanan['status_pemesanan'] == 'approved') {
+                        $sizeQr = 300;
+                        $jsonQr = json_encode($qrData, JSON_UNESCAPED_UNICODE);
+                        $encodedQr = urlencode($jsonQr);
                         echo '
-            <div class="flex justify-center items-center mt-10">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $encodedQr . '" alt="QR Code">
+        <div class="p-4 md:p-5 min-h-102.5 flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+            <div class="flex flex-wrap justify-between items-center gap-2">
+                <div>
+                    <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">Paket ' . $paket['nama_paket'] . '</p>
+                    <p class="text-base sm:text-sm text-gray-800 dark:text-neutral-200">Lapangan ' . $namaLapangan . '</p>
+                </div>
+                <div>
+                    <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">|</p>
+                </div>
+                <div>
+                    <p class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">' . $pemesanan['tanggal_pemesanan'] . '</p>
+                    <p class="text-base sm:text-sm text-gray-800 dark:text-neutral-200">' . $paket['jam_paket'] . '</p>
+                </div>
+                <div>
+                    <span class="py-[5px] px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-md bg-teal-100 text-teal-800 dark:';
+                        if ($pemesanan['status_pemesanan'] == 'approved') {
+                            echo 'bg-teal-500/10 dark:text-teal-500"';
+                        } else {
+                            echo 'bg-yellow-500/10 dark:text-yellow-500"';
+                        }
+                        echo '>'
+                            . ucwords($pemesanan['status_pemesanan']) . '
+                    </span>
+                </div>
             </div>
-            <a href="tiket.php?id=' . $pemesanan['id_pemesanan'] . '" >
-                            <div class="mt-7 mx-auto flex gap-x-1 justify-center items-center bg-green-600 text-white border border-neutral-700 w-fit h-fit px-4 py-0.5 rounded-lg hover:bg-green-700 transition-all ease-in duration-100">
-                                <svg viewBox="0 0 24 24" class="w-4 h-fit" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <g id="Interface / Download">
-                                            <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            ';
+                        if ($pemesanan['status_pemesanan'] == 'approved') {
+                            echo '
+                <div class="flex justify-center items-center mt-10">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . $encodedQr . '" alt="QR Code">
+                </div>
+                <a href="tiket.php?id=' . $pemesanan['id_pemesanan'] . '" >
+                                <div class="mt-7 mx-auto flex gap-x-1 justify-center items-center bg-green-600 text-white border border-neutral-700 w-fit h-fit px-4 py-0.5 rounded-lg hover:bg-green-700 transition-all ease-in duration-100">
+                                    <svg viewBox="0 0 24 24" class="w-4 h-fit" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g id="Interface / Download">
+                                                <path id="Vector" d="M6 21H18M12 3V17M12 17L17 12M12 17L7 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </g>
                                         </g>
-                                    </g>
-                                </svg>
-                                Cetak Tiket
-                            </div>
-                        </a>
-        </div>';
+                                    </svg>
+                                    Cetak Tiket
+                                </div>
+                            </a>
+            </div>';
+                        } else {
+                            echo '</div>';
+                        }
                     }
                 }
+
                 ?>
 
 
