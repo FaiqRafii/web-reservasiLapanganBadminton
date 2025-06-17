@@ -100,11 +100,14 @@ $tambah = isset($_GET['tambah']) ? htmlentities($_GET['tambah']) : '';
                         <input type="password" id="password" name="password" class="bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-700 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="Masukkan password anda">
                     </div>
                     <label for="input-group-1" class="block mb-2 text-sm  text-neutral-600">Nomor HP</label>
-                    <div class="relative mb-8">
+                    <div class="relative mb-2">
                         <div class="absolute inset-y-0 start-0 flex items-center justify-center pl-2 pointer-events-none">
                             <div class=" text-neutral-600 text-sm">+62</div>
                         </div>
                         <input type="text" id="noHp" name="noHp" class="bg-neutral-900 border border-neutral-800 text-white placeholder:text-neutral-700 text-sm rounded-lg  focus:ring-blue-500 focus:border-neutral-500 block w-full ps-10 p-2.5" placeholder="8xxxxxx">
+                    </div>
+                    <div class="text-neutral-700 text-xs mb-8">
+                        <div>Sudah punya akun?<span class="text-neutral-600 hover:font-semibold hover:cursor-pointer hover:text-red-500"><a href="login.php"> Login</a></span></div>
                     </div>
                     <div class="flex justify-center items-center">
                         <input type="submit" value="Daftar" class="bg-gradient-to-bl from-red-700 to-red-900 hover:bg-gradient-to-tr  text-white hover:cursor-pointer hover:bg-[#5D320E] transition-all ease-in duration-75 px-5 py-1.5  font-semibold text-sm rounded">

@@ -403,13 +403,12 @@
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor" />
                         </svg>
                         <blockquote>
-                            <p class="text-xl font-medium text-neutral-900 md:text-2xl dark:text-white">"Landwind is just awesome. It contains tons of predesigned components and pages starting from login screen to complex dashboard. Perfect choice for your next SaaS application."</p>
+                            <p class="text-xl font-medium text-neutral-900 md:text-2xl dark:text-white">"Sangat mudah untuk digunakan."</p>
                         </blockquote>
                         <figcaption class="flex items-center justify-center mt-6 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-neutral-500 dark:divide-neutral-700">
-                                <div class="pr-3 font-medium text-neutral-900 dark:text-white">Micheal Gough</div>
-                                <div class="pl-3 text-sm font-light text-neutral-500 dark:text-neutral-400">CEO at Google</div>
+                                <div class="pr-3 font-medium text-neutral-900 dark:text-white">Cece</div>
                             </div>
                         </figcaption>
                     </figure>
@@ -423,13 +422,12 @@
                             <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor" />
                         </svg>
                         <blockquote>
-                            <p class="text-xl font-medium text-neutral-900 md:text-2xl dark:text-white">"2"</p>
+                            <p class="text-xl font-medium text-neutral-900 md:text-2xl dark:text-white">"Membantu banget untuk pemesanan lapangan"</p>
                         </blockquote>
                         <figcaption class="flex items-center justify-center mt-6 space-x-3">
                             <img class="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture">
                             <div class="flex items-center divide-x-2 divide-neutral-500 dark:divide-neutral-700">
-                                <div class="pr-3 font-medium text-neutral-900 dark:text-white">Micheal Gough</div>
-                                <div class="pl-3 text-sm font-light text-neutral-500 dark:text-neutral-400">CEO at Google</div>
+                                <div class="pr-3 font-medium text-neutral-900 dark:text-white">Reza</div>
                             </div>
                         </figcaption>
                     </figure>
@@ -689,8 +687,7 @@
 
                         </div>
                         <div class="flex mt-5 text-white text-sm justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200 dark:border-neutral-700">
-                            <input type="reset" id="reset" value="Reset" class="bg-red-500 hover:bg-red-600 hover:cursor-pointer rounded-lg py-2 px-3">
-                            <input type="submit" name="" id="" value="Tambah" class="bg-green-600 hover:bg-green-700 hover:cursor-pointer rounded-lg py-2 px-3">
+                            <input type="submit" name="" id="" value="Pesan" class="bg-green-600 hover:bg-green-700 hover:cursor-pointer rounded-lg py-2 px-4">
                         </div>
                     </form>
                 </div>

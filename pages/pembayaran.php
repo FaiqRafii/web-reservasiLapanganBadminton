@@ -35,8 +35,8 @@ $hargaPaket = $_GET['hargaPaket'];
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/logos/logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/logos/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/logos/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/logos/logo.png">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
